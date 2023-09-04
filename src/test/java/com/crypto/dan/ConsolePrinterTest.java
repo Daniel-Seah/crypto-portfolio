@@ -1,5 +1,6 @@
 package com.crypto.dan;
 
+import com.crypto.dan.model.PortfolioPosition;
 import com.crypto.dan.model.PortfolioUpdate;
 import com.crypto.dan.model.StockPrice;
 import org.junit.jupiter.api.AfterEach;
@@ -27,7 +28,7 @@ class ConsolePrinterTest {
     }
 
     @Test
-    void shouldNotPrintContent_whenThereAreNoUpdates() throws IOException {
+    void shouldNotPrintContent_whenThereAreNoUpdates() {
         assertThat(out.toString()).isEmpty();
     }
 
@@ -70,8 +71,8 @@ class ConsolePrinterTest {
 
     @Test
     void shouldPrintPortfolioPositions() {
-        PortfolioUpdate.PortfolioPosition apple = new PortfolioUpdate.PortfolioPosition("AAPL", BigDecimal.valueOf(110), BigDecimal.valueOf(1_000), BigDecimal.valueOf(110_000));
-        PortfolioUpdate.PortfolioPosition tesla = new PortfolioUpdate.PortfolioPosition("TSLA", BigDecimal.valueOf(450), BigDecimal.valueOf(-10_000), BigDecimal.valueOf(-4_500_000));
+        PortfolioPosition apple = new PortfolioPosition("AAPL", BigDecimal.valueOf(110), BigDecimal.valueOf(1_000), BigDecimal.valueOf(110_000));
+        PortfolioPosition tesla = new PortfolioPosition("TSLA", BigDecimal.valueOf(450), BigDecimal.valueOf(-10_000), BigDecimal.valueOf(-4_500_000));
         PortfolioUpdate update = new PortfolioUpdate(emptyList(), asList(apple, tesla), BigDecimal.ZERO);
 
         printer.render(update);

@@ -1,11 +1,13 @@
 package com.crypto.dan;
 
+import com.crypto.dan.model.PortfolioPosition;
 import com.crypto.dan.model.PortfolioUpdate;
 import com.crypto.dan.model.StockPrice;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -34,11 +36,11 @@ public class ConsolePrinter implements Observer {
         renderPortfolioValue(update.getValue());
     }
 
-    private void renderPortfolioPosition(List<PortfolioUpdate.PortfolioPosition> positions) {
+    private void renderPortfolioPosition(Collection<PortfolioPosition> positions) {
         positions.forEach(this::renderPosition);
     }
 
-    private void renderPosition(PortfolioUpdate.PortfolioPosition p) {
+    private void renderPosition(PortfolioPosition p) {
         String price = df.format(p.getPrice());
         String quantity = df.format(p.getQuantity());
         String value = df.format(p.getValue());
