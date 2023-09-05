@@ -25,23 +25,34 @@ public class StockPriceService extends Observable {
     }
 
     public void updateAll() {
-        List<StockPrice> updates = stocks.stream()
-                .map(this::getStockPrice)
-                .collect(Collectors.toList());
+        List<StockPrice> updates = updateAllStockPrices();
         notify(updates);
     }
 
     public void update() {
-        if (stocks.isEmpty()) {
+        StockPrice stockPrice = updateRandomStockPrice();
+        if (stockPrice == null) {
             return;
         }
-        String randomStock = stocks.get(rng.nextInt(stocks.size()));
-        StockPrice stockPrice = getStockPrice(randomStock);
         notify(singletonList(stockPrice));
     }
 
+    private List<StockPrice> updateAllStockPrices() {
+        return stocks.stream()
+                .map(this::getStockPrice)
+                .collect(Collectors.toList());
+    }
+
+    private StockPrice updateRandomStockPrice() {
+        if (stocks.isEmpty()) {
+            return null;
+        }
+        String randomStock = stocks.get(rng.nextInt(stocks.size()));
+        return getStockPrice(randomStock);
+    }
+
     private StockPrice getStockPrice(String id) {
-        BigDecimal price = prices.getPrice(id, null);
+        BigDecimal price = prices.getPrice();
         return new StockPrice(id, price);
     }
 

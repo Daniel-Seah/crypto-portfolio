@@ -3,7 +3,6 @@ package com.crypto.dan.repository;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.Random;
 
 @Repository
@@ -14,7 +13,7 @@ public class StockPriceRepository {
         this.rng = rng;
     }
 
-    public BigDecimal getPrice(String id, Instant time) {
+    public BigDecimal getPrice() {
         return BigDecimal.valueOf(rng.nextInt(100_000) + 1, 2);
     }
 }

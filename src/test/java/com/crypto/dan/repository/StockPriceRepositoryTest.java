@@ -29,7 +29,7 @@ class StockPriceRepositoryTest {
     void shouldReturnOneCent_whenRandomIsAtLowerBound() {
         when(rng.nextInt(anyInt())).thenReturn(0);
 
-        BigDecimal price = prices.getPrice("", null);
+        BigDecimal price = prices.getPrice();
 
         assertThat(price).isEqualTo(new BigDecimal("0.01"));
     }
@@ -38,7 +38,7 @@ class StockPriceRepositoryTest {
     void shouldReturnOneThousand_whenRandomIsAtUpperBound() {
         when(rng.nextInt(anyInt())).thenReturn(99_999);
 
-        BigDecimal price = prices.getPrice("", null);
+        BigDecimal price = prices.getPrice();
 
         assertThat(price).isEqualTo(new BigDecimal("1000.00"));
     }
@@ -47,7 +47,7 @@ class StockPriceRepositoryTest {
     void shouldReturnRandomAmountInDollars() {
         when(rng.nextInt(anyInt())).thenReturn(12_34);
 
-        BigDecimal price = prices.getPrice("", null);
+        BigDecimal price = prices.getPrice();
 
         assertThat(price).isEqualTo(new BigDecimal("12.35"));
     }

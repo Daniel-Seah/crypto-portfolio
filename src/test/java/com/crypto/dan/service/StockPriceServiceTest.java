@@ -15,7 +15,6 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -38,7 +37,7 @@ class StockPriceServiceTest {
 
     @Test
     void updateAll_shouldReturnAllPrices_whenStockListingIsProvided() {
-        when(repo.getPrice(any(), any())).thenReturn(BigDecimal.ZERO).thenReturn(BigDecimal.ONE);
+        when(repo.getPrice()).thenReturn(BigDecimal.ZERO).thenReturn(BigDecimal.ONE);
         StockPriceService service = createServiceWith(asList("AAPL", "TSLA"));
 
         List<List<Object>> events = updateAllAndReturnEvents(service);
@@ -58,7 +57,7 @@ class StockPriceServiceTest {
 
     @Test
     void update_shouldEmitUpdate_whenStockListingIsProvided() {
-        when(repo.getPrice(any(), any())).thenReturn(BigDecimal.ONE);
+        when(repo.getPrice()).thenReturn(BigDecimal.ONE);
         when(rng.nextInt(anyInt())).thenReturn(1);
         StockPriceService service = createServiceWith(asList("AAPL", "TSLA"));
 
